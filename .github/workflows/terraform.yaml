@@ -24,7 +24,7 @@ jobs:
           aws-region: ap-south-1
 
       - name: Terraform Init
-        working-directory: .github/workflows/githubactions-aws-26
+        working-directory: .github/workflows/modules/tgw/tgw-route-table/environments/prod
         run: terraform init
 
 
@@ -35,21 +35,21 @@ jobs:
           find . -name "*.tf"
 
       - name: Terraform Validate
-        working-directory: .github/workflows/githubactions-aws-26
+        working-directory: .github/workflows/modules/tgw/tgw-route-table/environments/prod
         run: terraform validate
 
 
       - name: Terraform Plan
-        working-directory: .github/workflows/githubactions-aws-26
+        working-directory: .github/workflows/modules/tgw/tgw-route-table/environments/prod
         run: terraform plan -out=tfplan
 
 
       - name: Terraform Apply
-        working-directory: .github/workflows/githubactions-aws-26
+        working-directory: .github/workflows/modules/tgw/tgw-route-table/environments/prod
         run: terraform apply -auto-approve tfplan
 
       - name: Terraform Apply
-        working-directory: .github/workflows/terraform1
+        working-directory: .github/workflows/modules/tgw/tgw-route-table/environments/prod
         run: terraform apply -auto-approve tfplan
 
 
