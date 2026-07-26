@@ -28,11 +28,11 @@ jobs:
           role-to-assume: arn:aws:iam::647132523867:role/github-actions-terraform-role-v1
           aws-region: ap-south-1
 
-      - name: Terraform Init
+      - name: Terraform init 
         working-directory: .github/workflow/githubactions-aws-26
         run: terraform init
 
-      - name: Show Files
+      - name: Show Files  
         run: |
           pwd
           ls -la
@@ -42,14 +42,14 @@ jobs:
 
       - name: Terraform Validate
         working-directory: .github/workflows/githubactions-aws-26
-        run: terraform validate
+        run: terraform validate  
                
        
       - name: Terraform Plan
         working-directory: .github/workflows/githubactions-aws-26
-        run: terraform plan -out=tfplan  
+        run: terraform plan -out=tfplan    
    
 
       - name: Terraform Apply
         working-directory: .github/workflows/githubactions-aws-26
-        run: terraform apply -auto-approve tfplan
+        run: terraform apply -auto-approve tfplan  
