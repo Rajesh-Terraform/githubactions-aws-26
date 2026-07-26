@@ -25,13 +25,31 @@ jobs:
 
       - uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::<HUB_ACCOUNT_ID>:role/github-actions-role
-          aws-region: us-east-1
+          role-to-assume: arn:aws:iam::647132523867:role/github-actions-terraform-role-v1
+          aws-region: ap-south-1
 
-      - run: terraform init
+      - name: Terraform Init
+        working-directory: .github/workflow/githubactions-aws-26
+        run: terraform init
 
-      - run: terraform validate
+      - name: Show Files
+        run: |
+          pwd
+          ls -la
+          find . -name "*.tf"
 
-      - run: terraform plan
 
-      - run: terraform apply -auto-approve  
+
+      - name: Terraform Validate
+        working-directory: .github/workflows/githubactions-aws-26
+        run: terraform validate
+               
+       
+      - name: Terraform Plan
+        working-directory: .github/workflows/githubactions-aws-26
+        run: terraform plan -out=tfplan  
+   
+
+      - name: Terraform Apply
+        working-directory: .github/workflows/githubactions-aws-26
+        run: terraform apply -auto-approve tfplan
