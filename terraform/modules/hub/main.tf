@@ -1,7 +1,5 @@
-resource "aws_vpc" "hub" {
-  cidr_block = var.vpc_cidr
+module "hub" {
+  source = "./modules/hub"
 
-  tags = {
-    Name = "hub-vpc"
-  }
+  vpc_cidr = var.hub_vpc_cidr
 }
