@@ -13,12 +13,7 @@ jobs:
   terraform:
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: environments/prod
-
     steps:
-
       - uses: actions/checkout@v4
 
       - uses: hashicorp/setup-terraform@v3
@@ -28,28 +23,20 @@ jobs:
           role-to-assume: arn:aws:iam::647132523867:role/github-actions-terraform-role-v1
           aws-region: ap-south-1
 
-      - name: Terraform init 
-        working-directory: .github/workflow/githubactions-aws-26
-        run: terraform init
-
-      - name: Show Files  
+      - name: Show Files
         run: |
           pwd
           ls -la
           find . -name "*.tf"
 
-
+      - name: Terraform Init
+        run: terraform init
 
       - name: Terraform Validate
-        working-directory: .github/workflows/githubactions-aws-26
-        run: terraform validate  
-               
-       
+        run: terraform validate
+
       - name: Terraform Plan
-        working-directory: .github/workflows/githubactions-aws-26
-        run: terraform plan -out=tfplan    
-   
+        run: terraform plan -out=tfplan
 
       - name: Terraform Apply
-        working-directory: .github/workflows/githubactions-aws-26
-        run: terraform apply -auto-approve tfplan  
+        run: terraform apply -auto-approve tfplan
