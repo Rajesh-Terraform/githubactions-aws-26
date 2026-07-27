@@ -1,3 +1,3 @@
-output "vpc_id" {
-  value = aws_vpc.hub.id
+output "hub_vpc_id" {
+  value = module.hub.vpc_id
 }
